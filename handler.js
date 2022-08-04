@@ -44,3 +44,18 @@ module.exports.createUser = async (event) => {
     ),
   };
 };
+
+module.exports.updateUser = async (event) => {
+  const body = querystring.parse(event["body"])
+  return {
+    statusCode: 200,
+    body: JSON.stringify(
+      {
+        message: `!Peticion para crear user`,
+        input: `!Hola ${body.user}`,
+      },
+      null,
+      2
+    ),
+  };
+};
