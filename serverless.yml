@@ -11,8 +11,15 @@ provider:
   runtime: nodejs12.x
   profile: dev_usuga
   region: us-east-1
+  iamRolesStatements:
+    - Effect: Allow
+      Action: 
+        - dynamodb:*
+      Resource: 
+        - arn:aws:dynamodb:us-east-1:004175726938:table/TaskTable
   apiGateway: 
     shouldStarNameWithService: true
+
 
 plugins: 
   - serverless-s3-sync
@@ -25,7 +32,14 @@ custom:
 
 functions:
   hello:
-    handler: handler.hello
+    handler: src/handler.hello
+  createTask: 
+    handler: src/createTask.createTask
+    events:
+      - http:
+          method: GET
+          path: /user/{name}
+          cors: true
   helloUser: 
     handler: handler.helloUser
     events:
@@ -34,7 +48,7 @@ functions:
           path: /user/{name}
           cors: true
   createUser: 
-    handler: handler.createUser
+    handler: src/handler.createUser
     events:
       - http:
           method: POST
@@ -55,9 +69,9 @@ resources:
       Properties: 
         TableName: TaskTable
         BillingMode: PAY_PER_REQUEST
-        AtributeDefinitions:
+        AttributeDefinitions:
         - AttributeName: id
-          AttributeType:
+          AttributeType: S
         KeySchema:
         - AttributeName: id
           KeyType: HASH

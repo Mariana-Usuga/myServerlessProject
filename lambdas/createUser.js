@@ -1,5 +1,5 @@
 //const querystring = require("querystring");
-const Responses = require('./API_responses')
+const Responses = require('../lambdas/API_responses')
 
 exports.handler = async event => {
   const requestBody = JSON.parse(event.body);
