@@ -1,21 +1,20 @@
 I should be uploaded
 
-/* getUSer:
+
+            - serverless-s3-sync
+
+
+getUser: 
     handler: lambdas/getUser.handler
-    events: 
-      -http:
-        path: get-user/{ID}
-        method: GET
-        cors: true */
-
-
-hello:
-    handler: handler.hello
-
-
-    createUser: 
+    events:
+      - http:
+          method: GET
+          path: /get-user/{ID}
+          cors: true
+  createUser: 
     handler: handler.createUser
     events:
       - http:
           method: POST
-          path: /user/{name}
+          path: /user
+          cors: true

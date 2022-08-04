@@ -1,6 +1,6 @@
 'use strict';
 
-const querystring = require("querystring");
+const querystring = require('querystring');
 
 module.exports.hello = async (event) => {
   return {
@@ -21,7 +21,7 @@ module.exports.helloUser = async (event) => {
     statusCode: 200,
     body: JSON.stringify(
       {
-        message: `!!!!!Hola usuarioooo ${event.pathParameters.name}!!`,
+        message: `!!!!!Hola usuario  ${event.pathParameters.name}!!`,
         input: event,
       },
       null,
@@ -30,22 +30,31 @@ module.exports.helloUser = async (event) => {
   };
 };
 
-module.exports.createUser = async (event) => {
-  const body = querystring.parse(event["body"])
+/*module.exports.createUser = async (event) => {
+  console.log('entra en la fucnionn')
+
+  //const body = querystring.parse(event["body"])
+  //console.log('entra en la fucnionn', body)
+  //console.log("event bodu", event.body)
+  //const body = querystring.parse(event["body"]
+
+  //console.log('event!!!', event.pathParameters)
+
   return {
     statusCode: 200,
     body: JSON.stringify(
       {
         message: `!Peticion para crear user`,
-        input: `!Hola ${body.user}`,
+        input: event,
       },
       null,
       2
     ),
   };
-};
+};*/
 
-module.exports.updateUser = async (event) => {
+module.exports.createUser = async (event) => {
+  console.log('entra en la funcion')
   const body = querystring.parse(event["body"])
   return {
     statusCode: 200,

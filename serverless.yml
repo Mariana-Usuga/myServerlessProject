@@ -1,3 +1,5 @@
+org: marianausuga21
+app: myserverlessproject
 
 
 service: myserverlessproject
@@ -31,6 +33,13 @@ functions:
           method: GET
           path: /user/{name}
           cors: true
+  createUser: 
+    handler: handler.createUser
+    events:
+      - http:
+          method: POST
+          path: /user
+          cors: true
   getUser: 
     handler: lambdas/getUser.handler
     events:
@@ -38,18 +47,22 @@ functions:
           method: GET
           path: /get-user/{ID}
           cors: true
-  createUser: 
-    handler: handler.createUser
-    events:
-      - http:
-          method: POST
-          path: /user
           
-
 resources: 
   Resources:
+    TaskTable: 
+      Type: AWS::DynamoDB::Table
+      Properties: 
+        TableName: TaskTable
+        BillingMode: PAY_PER_REQUEST
+        AtributeDefinitions:
+        - AttributeName: id
+          AttributeType:
+        KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+                
     DemoBucketUpload: 
       Type: AWS::S3::Bucket
       Properties: 
          BucketName: myserverlessprojectuploadbucket-789
-
