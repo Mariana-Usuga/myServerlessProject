@@ -1,0 +1,55 @@
+
+
+service: myserverlessproject
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  profile: dev_usuga
+  region: us-east-1
+  apiGateway: 
+    shouldStarNameWithService: true
+
+plugins: 
+  - serverless-s3-sync
+  - serverless-offline
+
+custom:
+   s3Sync: 
+     -bucketName: myserverlessprojectuploadbucket-789
+     localDir: Uploadload
+
+functions:
+  hello:
+    handler: handler.hello
+  helloUser: 
+    handler: handler.helloUser
+    events:
+      - http:
+          method: GET
+          path: /user/{name}
+          cors: true
+  getUser: 
+    handler: lambdas/getUser.handler
+    events:
+      - http:
+          method: GET
+          path: /get-user/{ID}
+          cors: true
+  createUser: 
+    handler: handler.createUser
+    events:
+      - http:
+          method: POST
+          path: /user
+          
+
+resources: 
+  Resources:
+    DemoBucketUpload: 
+      Type: AWS::S3::Bucket
+      Properties: 
+         BucketName: myserverlessprojectuploadbucket-789
+

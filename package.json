@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "querystring": "^0.2.1",
+    "serverless-s3-sync": "^3.0.0"
+  },
+  "devDependencies": {
+    "serverless-offline": "^9.1.4"
+  }
+}
