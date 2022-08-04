@@ -19,7 +19,7 @@ exports.handler = async event => {
 }
 
 const data = {
-  1234: { name:"Mariana Usuga", age: 20, job: "journalist"},
+  1234: { name:"Mariana", age: 20, job: "journalist"},
   7891: { name:"Sandra", age: 40, job: "teacher"},
   5678: { name:"Wilmar", age: 45, job: "plasterer"}
 }
